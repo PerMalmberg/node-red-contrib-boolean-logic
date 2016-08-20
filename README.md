@@ -1,2 +1,2 @@
 # node-red-contrib-boolean-logic
-Node-RED nodes easily perform Boolean logic despite the fact that Node-RED only supports a single input.
+Node-RED nodes to easily perform boolean logic despite the fact that Node-RED only supports a single input.
