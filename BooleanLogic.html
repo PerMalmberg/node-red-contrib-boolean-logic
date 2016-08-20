@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    RED.nodes.registerType('BooleanLogic',{
+        category: 'boolean logic',
+        color: '#C0DEED',
+        defaults: {
+			name: { 
+				value: ""
+			},
+            operation: {
+				value: "AND",
+				required: true,
+				validate:
+					function(v) { 
+						return v !== undefined && v.length > 0;
+					}
+			},
+			inputCount: {
+				value: 2,
+				required: true,
+				validate: 
+					function(v) { 
+						return !isNaN( parseInt( v ) ) && parseInt( v ) >= 2;
+					}
+				}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "serial.png",
+        label: 
+			function() {
+				var label = this.operation + " [" + this.inputCount + "]";
+				if( this.name !== undefined && this.name.length > 0 ) {
+					label = label + " (" + this.name + ")";
+				}
+				return label;
+			},
+		paletteLabel: function() {
+			return "Boolean logic";
+		}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="BooleanLogic">
+    <div class="form-row">
+        <label for="node-input-operation"><i class="icon-tag"></i> Operation</label>
+        <select type="text" id="node-input-operation" placeholder="Operation">
+			<option value="AND">And</option>
+			<option value="OR">Or</option>
+			<option value="XOR">Exclusive Or</option>
+		</select>
+    </div>
+	<div class="form-row">
+        <label for="node-input-inputCount"><i class="icon-tag"></i> Number of inputs</label>
+		<input type="text" id="node-input-inputCount" placeholder="Number of inputs to consider">
+    </div>
+	<div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BooleanLogic">
+    <p>A node that performs Boolean logic on the incoming payloads.</p>
+</script>
