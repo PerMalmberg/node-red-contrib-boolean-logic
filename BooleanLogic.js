@@ -1,3 +1,6 @@
+// Licensed under the MIT license, see LICENSE file.
+// Author: Per Malmberg (https://github.com/PerMalmberg)
+
 module.exports = function(RED) {
     function BooleanLogic(config) {
         RED.nodes.createNode(this,config);
