@@ -30,6 +30,7 @@ var NodeHelper = function( node ) {
 			}
 		);
 	};
+	
 			
 	this.SetResult = function( value ) {
 		self.DisplayStatus( value );

@@ -55,8 +55,8 @@ Author: Per Malmberg (https://github.com/PerMalmberg)
 		</select>
     </div>
 	<div class="form-row">
-        <label for="node-input-inputCount"><i class="icon-tag"></i> Number of inputs</label>
-		<input type="text" id="node-input-inputCount" placeholder="Number of inputs to consider">
+        <label for="node-input-inputCount"><i class="icon-tag"></i> Number of topics</label>
+		<input type="text" id="node-input-inputCount" placeholder="Number of topics to consider">
     </div>
 	<div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -65,5 +65,27 @@ Author: Per Malmberg (https://github.com/PerMalmberg)
 </script>
 
 <script type="text/x-red" data-help-name="BooleanLogic">
-    <p>A node that performs Boolean logic on the incoming payloads.</p>
+    <p>A node that performs Boolean logic on the incoming payloads.<br/>
+	Select the operation in the settings.<br/>
+	<br/>
+	The node expects a fixed number of topics (configured in the settings) on which it will operate. It will only output a value 
+	when it has seen the expected number of topics. If it ever sees more than the configured number of topics it will log a message then reset its state and start over.<br/>
+	<br/>
+	Example:<br/>
+	The node has been configured for two topics, with the operation OR. 
+	<br/>
+	<ol>	
+		<li>Topic 'A' with value false arrives - only one topic seen so no output.</li>
+		<li>Topic 'B' with value true arrives - two topics seen so the node evaluates the received topics and outputs true.</li>
+		<li>Topic 'C' arrives. This is the third topic which is one more than the configured number so the node resets and will not output another value until 
+		two new topics have been received. Note that when resetting it does not output any value.</li>
+	</ol>
+	<br/>
+	All incoming msg.payloads are converted into a boolean value according to the following rules (this applies to all boolean logic nodes):
+	<ol>	
+		<li>Boolean values are takes as-is.</li>
+		<li>For strings, the values "1" and "true" evaluates to true, everything else evaluates to false.</li>
+		<li>For numbers, only a value of 0 evaluates to false, everything else evaluates to true.</li>
+	</ol>
+	</p>
 </script>
