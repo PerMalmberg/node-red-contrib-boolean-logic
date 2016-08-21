@@ -32,11 +32,11 @@ var NodeHelper = function( node ) {
 	};
 	
 			
-	this.SetResult = function( value ) {
+	this.SetResult = function( value, optionalTopic ) {
 		self.DisplayStatus( value );
 		
 		var msg = { 
-			topic: "result",
+			topic: optionalTopic === undefined ? "result" : optionalTopic,
 			payload: value
 		};
 

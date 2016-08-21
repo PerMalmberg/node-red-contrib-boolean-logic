@@ -26,14 +26,22 @@ Author: Per Malmberg (https://github.com/PerMalmberg)
 					function(v) { 
 						return !isNaN( parseInt( v ) ) && parseInt( v ) >= 2;
 					}
-				}
+			},
+			topic: {
+				value: "result",
+				required: true,
+				validate:
+					function(v) { 
+						return v !== undefined && v.length > 0;
+					}
+			}
         },
         inputs:1,
         outputs:1,
         icon: "serial.png",
         label: 
 			function() {
-				var label = this.operation + " [" + this.inputCount + "]";
+				var label = this.operation + " [" + this.inputCount + "];
 				if( this.name !== undefined && this.name.length > 0 ) {
 					label = label + " (" + this.name + ")";
 				}
@@ -62,11 +70,16 @@ Author: Per Malmberg (https://github.com/PerMalmberg)
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
+	<div class="form-row">
+        <label for="node-input-topic"><i class="icon-tag"></i> Topic</label>
+        <input type="text" id="node-input-topic" placeholder="Topic">
+    </div>
 </script>
 
 <script type="text/x-red" data-help-name="BooleanLogic">
     <p>A node that performs Boolean logic on the incoming payloads.<br/>
 	Select the operation in the settings.<br/>
+	Changing the topic is usually only needed when chaining multiple boolean nodes after each other becuse the topics will then all be the same when delivered to the nodes further down the chain.<br/>
 	<br/>
 	The node expects a fixed number of topics (configured in the settings) on which it will operate. It will only output a value 
 	when it has seen the expected number of topics. If it ever sees more than the configured number of topics it will log a message then reset its state and start over.<br/>

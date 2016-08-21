@@ -25,7 +25,7 @@ module.exports = function(RED) {
 				if( keyCount == node.config.inputCount ) {
 					var res = CalculateResult();
 				
-					h.SetResult( res );
+					h.SetResult( res, node.config.topic );
 				}
 				else if(keyCount > node.config.inputCount ) {
 					node.warn( 
