@@ -1,19 +1,20 @@
 // Licensed under the MIT license, see LICENSE file.
 // Author: Per Malmberg (https://github.com/PerMalmberg)
-
 module.exports = function(RED) {
     function BooleanLogic(config) {
         RED.nodes.createNode(this,config);
 		this.config = config;
         this.state = {};
 		var node = this;
+		var NodeHelper = require('./NodeHelper.js');
+		var h = new NodeHelper( node );
 		
         this.on('input', function(msg) {
 			var topic = msg.topic;
 			var payload = msg.payload;
 			
 			if( topic !== undefined && payload !== undefined ) {
-				var value = ToBoolean( payload );
+				var value = h.ToBoolean( payload );
 				var state = node.state;
 				
 				state[topic] = value;
@@ -24,12 +25,16 @@ module.exports = function(RED) {
 				if( keyCount == node.config.inputCount ) {
 					var res = CalculateResult();
 				
-					SetResult( res );
+					h.SetResult( res );
 				}
 				else if(keyCount > node.config.inputCount ) {
-					node.warn( (node.config.name !== undefined && node.config.name.length > 0 ? node.config.name : "BooleanLogic") + " [" + node.config.operation + "]: More than the specified " + node.config.inputCount + " topics received, resetting.");
+					node.warn( 
+						(node.config.name !== undefined && node.config.name.length > 0 
+							? node.config.name : "BooleanLogic") 
+							+ " [" + node.config.operation + "]: More than the specified " 
+							+ node.config.inputCount + " topics received, resetting. Will not output new value until " + node.config.inputCount + " new topics have been received.");
 					node.state = {};
-					SetResult( false );
+					h.SetResult( false );
 				}
 			}
         });
@@ -60,7 +65,9 @@ module.exports = function(RED) {
 			var trueCount = 0;
 			
 			for( var key in node.state ) {
-				trueCount += node.state[key] ? 1 : 0;
+				if( node.state[key] ) {
+					trueCount++;
+				}
 			}
 			
 			return trueCount == 1;
@@ -81,45 +88,7 @@ module.exports = function(RED) {
 			
 			return res;
 		}
-		
-		function ToBoolean( value ) {
-			var res = false;
-
-			if (typeof value === 'boolean') {
-				res = value;
-			} 
-			else if (typeof value === 'string') {
-				res = value === "1" || value.toLowerCase() === "true";
-			}
-			else if (typeof value === 'number') {
-				res = value !== 0 ? true : false;
-			}
-			else {
-				node.warn("BooleanLogic: '" + value + "' is not convertable to a boolean");
-			}
-
-			return res;
-		}
-		
-		function DisplayStatus(value) {
-			node.status( {fill: value ? "green" : "red", shape: "dot", text: value ? "true" : "false" } );
-		}
-		
-		function SetResult(value) {
-			DisplayStatus(value);
-			
-			var msg = { 
-				topic: "result",
-				payload: value
-			};
-					
-			node.send(msg);
-		}
-		
-		// Reset status on creation (includes deploy), but do not send.
-		DisplayStatus(false);
     }	
-	
 	
     RED.nodes.registerType("BooleanLogic",BooleanLogic);
 }
