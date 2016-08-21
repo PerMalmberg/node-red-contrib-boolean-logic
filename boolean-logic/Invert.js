@@ -13,7 +13,7 @@ module.exports = function(RED) {
 			var payload = msg.payload;
 			
 			if( topic !== undefined && payload !== undefined ) {
-				h.SetResult( !h.ToBoolean( payload ), topic );1
+				h.SetResult( !h.ToBoolean( payload ), topic );
 			}
         });
     }	
