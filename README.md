@@ -28,5 +28,5 @@ This node must be configured with the expected number of topics. It will not out
 ##Version history
 * 0.0.1	First release
 * 0.0.2
-  * Changed status indicators to from dot to rings for false-values.
+  * Changed status indicators from dot to rings for false-values.
   * Reworked the conversion of input values to be consistent between numbers and strings with numeric meaning.
