@@ -4,20 +4,26 @@
 var NodeHelper = function( node ) {
 	var myNode = node;
 	var self = this;
-
+	var decimal = /^\s*[+-]{0,1}\s*([\d]+(\.[\d]*)*)\s*$/
+	
+	
 	this.ToBoolean = function( value ) {
 		var res = false;
 
 		if (typeof value === 'boolean') {
 			res = value;
 		} 
-		else if (typeof value === 'string') {
-			res = value === "1" || value.toLowerCase() === "true";
+		else if( typeof value === 'number' || typeof value === 'string' ) {
+			// Is it formated as a decimal number?
+			if( decimal.test( value ) ) {
+				var v = parseFloat( value );
+				res = v != 0;
+			}
+			else {
+				res = value.toLowerCase() === "true";
+			}
 		}
-		else if (typeof value === 'number') {
-			res = value === 0 ? false : true;
-		}
-
+		
 		return res;
 	};
 
@@ -25,7 +31,7 @@ var NodeHelper = function( node ) {
 		myNode.status( 
 			{ 
 				fill: value ? "green" : "red", 
-				shape: "dot", 
+				shape: value ? "dot" : "ring", 
 				text: value ? "true" : "false" 
 			}
 		);

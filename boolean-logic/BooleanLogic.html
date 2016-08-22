@@ -96,9 +96,9 @@ Author: Per Malmberg (https://github.com/PerMalmberg)
 	<br/>
 	All incoming msg.payloads are converted into a boolean value according to the following rules (this applies to all boolean logic nodes):
 	<ol>	
-		<li>Boolean values are takes as-is.</li>
-		<li>For strings, the values "1" and "true" evaluates to true, everything else evaluates to false.</li>
-		<li>For numbers, only a value of 0 evaluates to false, everything else evaluates to true.</li>
+		<li>Boolean values are taken as-is.</li>
+		<li>For numbers, 0 evaluates to false, all other numbers evaluates to true.</li>
+		<li>Strings are converted to numbers if they match the format of a decimal value, then the same rule as for numbers are applied. If it does not match, it evaluates to false. Also, the string "true" evaluates to true.</li>
 	</ol>
 	</p>
 </script>

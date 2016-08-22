@@ -15,12 +15,18 @@ What I came up with are the following nodes.
 * Debug: A debug node that displays the status direcly in the editor, making it easier to see the boolean value at a specific point.
 
 All nodes attempts to convert the incoming ```msg.payload``` to a boolean value according to these rules:
-* Boolean values are takes as-is.
-* For strings, the values "1" and "true" evaluates to true, everything else evaluates to false.
-* For numbers, only a value of 0 evaluates to false, everything else evaluates to true.
+* Boolean values are taken as-is.
+* For numbers, 0 evaluates to false, all other numbers evaluates to true.
+* Strings are converted to numbers if they match the format of a decimal value, then the same rule as for numbers are applied. Also, the string "true" evaluates to true.
 
 ####BooleanLogic
 This node must be configured with the expected number of topics. It will not output a value until it has received the configured number of topics. Also, if it receives more than the configured number of topics it will reset (but not output a value) and wait until it once again sees the configured number of topics.
 
 ##Example
 ![Example](http://i.imgur.com/m2s6JRl.png)
+
+##Version history
+* 0.0.1	First release
+* 0.0.2
+    Changed status indicators to from dot to rings for false-values.
+	Reworked the conversion of input values to be consistent between numbers and strings with numeric meaning.
