@@ -17,7 +17,7 @@ What I came up with are the following nodes.
 All nodes attempts to convert the incoming ```msg.payload``` to a boolean value according to these rules:
 * Boolean values are taken as-is.
 * For numbers, 0 evaluates to false, all other numbers evaluates to true.
-* Strings are converted to numbers if they match the format of a decimal value, then the same rule as for numbers are applied. Also, the string "true" evaluates to true.
+* Strings are converted to numbers if they match the format of a decimal value, then the same rule as for numbers are applied. If it does not match, it evaluates to false. Also, the string "true" evaluates to true.
 
 ####BooleanLogic
 This node must be configured with the expected number of topics. It will not output a value until it has received the configured number of topics. Also, if it receives more than the configured number of topics it will reset (but not output a value) and wait until it once again sees the configured number of topics.
