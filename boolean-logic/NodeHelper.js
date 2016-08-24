@@ -37,6 +37,14 @@ var NodeHelper = function( node ) {
 		);
 	};
 	
+	this.DisplayUnkownStatus = function() {
+		myNode.status( 
+			{ 
+				fill: "gray", 
+				shape: "dot", 
+				text: "Unknown" 
+			});
+	};
 			
 	this.SetResult = function( value, optionalTopic ) {
 		self.DisplayStatus( value );

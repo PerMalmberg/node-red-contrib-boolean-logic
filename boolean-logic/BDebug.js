@@ -16,8 +16,9 @@ module.exports = function(RED) {
 				h.DisplayStatus( h.ToBoolean( payload ) );
 			}
         });
+
+		h.DisplayUnkownStatus();
     }	
-	
 	
     RED.nodes.registerType("BDebug",BDebug);
 }

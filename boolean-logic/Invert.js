@@ -16,6 +16,8 @@ module.exports = function(RED) {
 				h.SetResult( !h.ToBoolean( payload ), topic );
 			}
         });
+		
+		h.DisplayUnkownStatus();
     }	
 	
 	

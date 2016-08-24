@@ -34,7 +34,7 @@ module.exports = function(RED) {
 							+ " [" + node.config.operation + "]: More than the specified " 
 							+ node.config.inputCount + " topics received, resetting. Will not output new value until " + node.config.inputCount + " new topics have been received.");
 					node.state = {};
-					h.SetResult( false );
+					h.DisplayUnkownStatus();
 				}
 			}
         });
@@ -88,6 +88,8 @@ module.exports = function(RED) {
 			
 			return res;
 		}
+		
+		h.DisplayUnkownStatus();
     }	
 	
     RED.nodes.registerType("BooleanLogic",BooleanLogic);
