@@ -13,6 +13,7 @@ What I came up with are the following nodes.
 * BooleanLogic: Can perform AND, OR and XOR operations on ```msg.payload``` on any number of topics.
 * Invert: Inverts the ```msg.payload```, e.g. true -> false.
 * Debug: A debug node that displays the status direcly in the editor, making it easier to see the boolean value at a specific point.
+* Two nodes ```Input A``` and ```Input B``` just for convenience to change the topic to A or B, respectively.
 
 All nodes attempts to convert the incoming ```msg.payload``` to a boolean value according to these rules:
 * Boolean values are taken as-is.
