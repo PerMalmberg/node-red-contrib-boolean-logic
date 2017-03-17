@@ -1,0 +1,31 @@
+<!-- 
+Licensed under the MIT license, see LICENSE file.
+Author: Danny Drieß
+-->
+<script type="text/javascript">
+    RED.nodes.registerType('BInputA',{
+        category: 'boolean logic',
+        color: '#C0DEED',
+        defaults: {
+            name: {value:"A"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "serial.png",
+        label: function() {
+            return this.name||"A";
+        },
+        paletteLabel: function() { return "Input A"; }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="BInputA">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="BInputA">
+    <p>Changes the topic to A such that it corresponds to a first input to the boolean logic node</p>
+</script>

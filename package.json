@@ -15,7 +15,9 @@
         "nodes": {
 			"BooleanLogic": "boolean-logic/BooleanLogic.js",
 			"Invert": "boolean-logic/Invert.js",
-            "BDebug": "boolean-logic/BDebug.js"
+            "BDebug": "boolean-logic/BDebug.js",
+            "BInputA": "boolean-logic/BInputA.js",
+            "BInputB": "boolean-logic/BInputB.js"
         }
     }
 }
