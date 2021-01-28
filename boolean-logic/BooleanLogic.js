@@ -35,6 +35,8 @@ module.exports = function(RED) {
 							+ node.config.inputCount + " topics received, resetting. Will not output new value until " + node.config.inputCount + " new topics have been received.");
 					node.state = {};
 					h.DisplayUnkownStatus();
+				} else {
+					node.status({ fill: "yellow", shape: "dot", text: keyCount + " of " + node.config.inputCount + " topics recieved." });
 				}
 			}
         });
